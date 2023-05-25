@@ -2,6 +2,6 @@
 
 int main(void)
 {
-	interact()
+	interact();
 	return 0;
 }

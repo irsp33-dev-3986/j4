@@ -3,7 +3,8 @@
 #include <stdio.h>
 
 enum rating {
-	unwatchabke = 1,
+	unreviewed = 0,
+	unwatchable = 1,
 	bad =  2,
 	mediocre = 3,
 	good = 4,
@@ -14,6 +15,7 @@ typedef struct film {
 	int id;
 	int year;
 	int running_time_minutes;
+	wchar_t* title;
 	wchar_t* main_actor;
 	wchar_t* director;
 	wchar_t* writer;

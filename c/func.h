@@ -9,7 +9,7 @@ film set_film_instance_property(film film_instance, wchar_t* property);
 
 film user_leave_rating(film film_instance, enum rating rating_score);
 
-wchar_t* update_movie_database(film film_instance);
+struct node* update_movie_database(film film_instance);
 
 
 /*

@@ -1,3 +1,5 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include "func.h"
 
 int counter = 0;
@@ -41,6 +43,7 @@ film build_film_instance(int year, int running_time_minutes, wchar_t* title, wch
 		writer,
 		genre,
 		description,
+		unreviewed
 	};
 	counter ++;
 	return film_instance;
@@ -50,7 +53,7 @@ film user_leave_rating(film film_instance, enum rating rating_score)
 {
 	if (rating_score >= 1 && rating_score <= 5)
 	{
-		film film_instance.score = rating_score;
+		film_instance.score = rating_score;
 	}
 	else
 	{
@@ -97,16 +100,17 @@ void interact()
 {
 	while (TRUE)
 	{
-		wchar_t* a,b,c,d,e,f,g,h = L"Unknown";
-		wchar_t* title = scanf_s(L"Adding a movie.\n\nEnter the title : %ls\n", a);
-		int year = scanf_s(L"Enter the release year : %i\n", b);
-		int running_time_minutes = scanf_s(L"Enter the running time (in minutes) : %i\n", c);
-		wchar_t* main_actor = scanf_s(L"Enter the name of the main actor : %ls\n", d);
-		wchar_t* director = scanf_s(L"Enter the name of the director : %ls\n", e);
-		wchar_t* writer = scanf_s(L"Enter the name of the writer : %ls\n", f);
-		wchar_t* genre = scanf_s(L"Enter the genre : %ls\n", g);
-		wchar_t* description = scanf_s(L"Enter the description : %ls\n", h);
+		wchar_t* a = L"Unknown", b = L"Unknown", c = L"Unknown", d = L"Unknown", e = L"Unknown", f = L"Unknown", g = L"Unknown", h = L"Unknown";
+		wchar_t* title = scanf(L"Adding a movie.\n\nEnter the title : %ls\n", a);
+		int year = scanf(L"Enter the release year : %i\n", b);
+		int running_time_minutes = scanf(L"Enter the running time (in minutes) : %i\n", c);
+		wchar_t* main_actor = scanf(L"Enter the name of the main actor : %ls\n", d);
+		wchar_t* director = scanf(L"Enter the name of the director : %ls\n", e);
+		wchar_t* writer = scanf(L"Enter the name of the writer : %ls\n", f);
+		wchar_t* genre = scanf(L"Enter the genre : %ls\n", g);
+		wchar_t* description = scanf(L"Enter the description : %ls\n", h);
 		film build_film_instance(int year, int running_time_minutes, wchar_t* title, wchar_t* main_actor, wchar_t* director, wchar_t* writer, wchar_t* genre, wchar_t* description);
+		break;
 	}
 	return 0;
 }
