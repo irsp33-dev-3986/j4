@@ -1,18 +1,41 @@
-#define row = 5
-#define col = 8
-
 #include "func.h"
 
 int counter = 0;
-// 5 movies max for this example
-wchar_t* movie_database[row][col];
+struct node* head = NULL;
 
-film build_film_instance(int year, float running_time_minutes, wchar_t* main_actor, wchar_t* director, wchar_t* writer, wchar_t* genre, wchar_t* description)
+/*
+ This is document #103, Linked List Basics, in the Stanford CS Education Library. This
+and other free educational materials are available at http://cslibrary.stanford.edu/. This
+document is free to be used, reproduced, or sold so long as this notice is clearly
+reproduced at its beginning.
+ http://cslibrary.stanford.edu/103/LinkedListBasics.pdf
+*/
+struct node* append_node(struct node** headRef, film data) {
+	struct node* current = *headRef;
+	struct node* newNode;
+	newNode = malloc(sizeof(struct node));
+	newNode->data = data;
+	newNode->next = NULL;
+	// special case for length 0
+	if (current == NULL) {
+		*headRef = newNode;
+	}
+	else {
+		// Locate the last node
+		while (current->next != NULL) {
+			current = current->next;
+		}
+		current->next = newNode;
+	}
+}
+
+film build_film_instance(int year, int running_time_minutes, wchar_t* title, wchar_t* main_actor, wchar_t* director, wchar_t* writer, wchar_t* genre, wchar_t* description)
 {
 	film film_instance = {
 		counter,
 		year,
 		running_time_minutes,
+		title,
 		main_actor,
 		director,
 		writer,
@@ -37,18 +60,20 @@ film user_leave_rating(film film_instance, enum rating rating_score)
 	return film_instance;
 }
 
-wchar_t* update_movie_database(film film_instance)
+struct node* update_movie_database(film film_instance)
 {
-	for (int i = 0; i < row; i++)
+	struct node* movie_database = append_node(&head, film_instance);
+	/*
+	for (int i = 0; i < 5; i++)
 	{
-		for (int j = 0; j < col; j++)
+		for (int j = 0; j < 8; j++)
 		{
 			wchar_t* movie_database[i][j] = {
 
 			};
 		}
 	}
-	wchar_t* movie_database[counter][] = {
+	wchar_t* movie_database[][] = {
 		film_instance.id,
 		film_instance.year,
 		film_instance.running_time_minutes,
@@ -58,6 +83,7 @@ wchar_t* update_movie_database(film film_instance)
 		film_instance.genre,
 		film_instance.description,
 	};
+	*/
 	return movie_database;
 }
 
@@ -65,4 +91,22 @@ film get_film_instance(int id)
 {
 	printf("Getting film by ID.");
 
+}
+
+void interact()
+{
+	while (TRUE)
+	{
+		wchar_t* a,b,c,d,e,f,g,h = L"Unknown";
+		wchar_t* title = scanf_s(L"Adding a movie.\n\nEnter the title : %ls\n", a);
+		int year = scanf_s(L"Enter the release year : %i\n", b);
+		int running_time_minutes = scanf_s(L"Enter the running time (in minutes) : %i\n", c);
+		wchar_t* main_actor = scanf_s(L"Enter the name of the main actor : %ls\n", d);
+		wchar_t* director = scanf_s(L"Enter the name of the director : %ls\n", e);
+		wchar_t* writer = scanf_s(L"Enter the name of the writer : %ls\n", f);
+		wchar_t* genre = scanf_s(L"Enter the genre : %ls\n", g);
+		wchar_t* description = scanf_s(L"Enter the description : %ls\n", h);
+		film build_film_instance(int year, int running_time_minutes, wchar_t* title, wchar_t* main_actor, wchar_t* director, wchar_t* writer, wchar_t* genre, wchar_t* description);
+	}
+	return 0;
 }
